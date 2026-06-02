@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vyana.ai/schemas/asp-0.1/user-consent-mandate.schema.json",
+  "title": "UserConsentMandate",
+  "description": "Long-lived, user-signed authorization that bounds an agent (ASP §6.1). Money is integer paise.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ucm_id", "version", "issued_at", "expires_at", "user_id", "device_id",
+    "idp", "kyc_level", "authenticator_tier", "caps", "allowed_categories",
+    "allowed_services", "signature_alg", "signature"
+  ],
+  "properties": {
+    "ucm_id": { "type": "string", "description": "ULID" },
+    "version": { "const": "asp-0.1" },
+    "issued_at": { "type": "string", "format": "date-time" },
+    "expires_at": { "type": "string", "format": "date-time" },
+    "user_id": { "type": "string" },
+    "device_id": { "type": "string" },
+    "idp": { "type": "string" },
+    "kyc_level": { "type": "integer", "enum": [1, 2, 3, 4] },
+    "authenticator_tier": { "type": "integer", "enum": [1, 2, 3, 4] },
+    "caps": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["monthly_paise", "per_txn_paise", "daily_paise"],
+      "properties": {
+        "monthly_paise": { "type": "integer", "minimum": 0 },
+        "per_txn_paise": { "type": "integer", "minimum": 0 },
+        "daily_paise": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "allowed_categories": { "type": "array", "items": { "type": "string" } },
+    "allowed_services": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "[\"*\"] for all, or explicit service ids"
+    },
+    "signature_alg": { "const": "EdDSA" },
+    "signature": { "type": "string", "description": "base64 Ed25519 over canonical form" }
+  }
+}

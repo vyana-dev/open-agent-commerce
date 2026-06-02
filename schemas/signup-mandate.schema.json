@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vyana.ai/schemas/asp-0.1/signup-mandate.schema.json",
+  "title": "SignupMandate",
+  "description": "Per-signup, user-signed authorization scoped to one UCM (ASP §6.2).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "mandate_id", "ucm_id", "version", "issued_at", "expires_at", "nonce",
+    "user_id", "device_id", "agent", "idp", "service", "plan", "config",
+    "max_cost_paise", "allowed_strategies", "consent_budget",
+    "user_raw_message", "signature_alg", "signature"
+  ],
+  "properties": {
+    "mandate_id": { "type": "string" },
+    "ucm_id": { "type": "string" },
+    "version": { "const": "asp-0.1" },
+    "issued_at": { "type": "string", "format": "date-time" },
+    "expires_at": { "type": "string", "format": "date-time", "description": "<= 10 min from issue" },
+    "nonce": { "type": "string" },
+    "user_id": { "type": "string" },
+    "device_id": { "type": "string" },
+    "agent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["platform", "session_id", "version"],
+      "properties": {
+        "platform": { "type": "string" },
+        "session_id": { "type": "string" },
+        "version": { "type": "string" }
+      }
+    },
+    "idp": { "type": "string" },
+    "service": { "type": "string" },
+    "plan": { "type": "string" },
+    "config": { "type": "object" },
+    "max_cost_paise": { "type": "integer", "minimum": 0 },
+    "allowed_strategies": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["native-asp", "oauth-app", "cli-session-reuse", "paste-token", "browser-automation"]
+      }
+    },
+    "consent_budget": { "type": "string", "enum": ["zero-tap", "one-tap", "two-tap", "manual"] },
+    "user_raw_message": { "type": "string" },
+    "provenance_callback": { "type": "string", "format": "uri" },
+    "signature_alg": { "const": "EdDSA" },
+    "signature": { "type": "string" }
+  }
+}

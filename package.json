@@ -1,0 +1,24 @@
+{
+  "name": "agent-signup-protocol",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Open protocols + reference primitives for AI-agent signup (ASP) and payment (APP).",
+  "type": "module",
+  "license": "MIT",
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "build": "npm run build --workspace @vyana/agent-signup-core",
+    "typecheck": "npm run typecheck --workspace @vyana/agent-signup-core",
+    "example": "node --experimental-strip-types examples/sign-and-verify.ts",
+    "test": "npm run typecheck && npm run example"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "typescript": "^5.7.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vyana-dev/agent-signup-protocol.git"
+  },
+  "engines": { "node": ">=22" }
+}

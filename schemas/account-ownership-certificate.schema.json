@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vyana.ai/schemas/asp-0.1/account-ownership-certificate.schema.json",
+  "title": "AccountOwnershipCertificate",
+  "description": "Service-signed user safety net — a direct-claim path to take over an account even if the IdP disappears (ASP §7.4, §11.7).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "aoc_id", "service", "user_id", "account_ref", "direct_claim_url",
+    "claim_token", "issued_at", "signature_alg", "signature"
+  ],
+  "properties": {
+    "aoc_id": { "type": "string" },
+    "service": { "type": "string" },
+    "user_id": { "type": "string" },
+    "account_ref": { "type": "string" },
+    "direct_claim_url": { "type": "string", "format": "uri" },
+    "claim_token": { "type": "string", "description": "single-use" },
+    "issued_at": { "type": "string", "format": "date-time" },
+    "signature_alg": { "const": "EdDSA" },
+    "signature": { "type": "string", "description": "service-signed" }
+  }
+}

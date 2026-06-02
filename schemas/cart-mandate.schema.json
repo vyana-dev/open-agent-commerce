@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vyana.ai/schemas/app-0.1/cart-mandate.schema.json",
+  "title": "CartMandate",
+  "description": "User-signed authorization to PAY a merchant (APP §13, AP2-aligned). Money is integer paise.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "mandate_id", "ucm_id", "version", "issued_at", "expires_at", "nonce",
+    "user_id", "device_id", "idp", "service", "line_items", "amount_paise",
+    "currency", "reason", "consent_budget", "user_raw_message",
+    "signature_alg", "signature"
+  ],
+  "properties": {
+    "mandate_id": { "type": "string" },
+    "ucm_id": { "type": "string" },
+    "version": { "const": "asp-0.1" },
+    "issued_at": { "type": "string", "format": "date-time" },
+    "expires_at": { "type": "string", "format": "date-time", "description": "<= 10 min from issue" },
+    "nonce": { "type": "string" },
+    "user_id": { "type": "string" },
+    "device_id": { "type": "string" },
+    "idp": { "type": "string" },
+    "service": { "type": "string" },
+    "line_items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["description", "amount_paise"],
+        "properties": {
+          "description": { "type": "string" },
+          "amount_paise": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
+    "amount_paise": { "type": "integer", "minimum": 0, "description": "total, integer paise" },
+    "currency": { "const": "INR" },
+    "reason": { "type": "string" },
+    "consent_budget": { "type": "string", "enum": ["zero-tap", "one-tap", "two-tap", "manual"] },
+    "user_raw_message": { "type": "string" },
+    "signature_alg": { "const": "EdDSA" },
+    "signature": { "type": "string" }
+  }
+}

@@ -1,0 +1,28 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install + typecheck primitives
+        working-directory: packages/agent-signup-core
+        run: |
+          npm install
+          npm run typecheck
+          npm run build
+      - name: Run sign-and-verify example
+        run: node --experimental-strip-types examples/sign-and-verify.ts
+      - name: Validate JSON Schemas are well-formed
+        run: |
+          for f in schemas/*.json; do
+            node -e "JSON.parse(require('fs').readFileSync('$f','utf8')); console.log('ok: $f')"
+          done

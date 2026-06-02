@@ -1,0 +1,39 @@
+{
+  "name": "@vyana/agent-signup-core",
+  "version": "0.1.0",
+  "description": "Reference primitives for the Agent Signup Protocol (ASP) and Agent Payment Protocol (APP): wire objects, canonical JSON, Ed25519 signing/verification, and credential-capsule encryption.",
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist", "src", "README.md"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "example": "node --experimental-strip-types ../../examples/sign-and-verify.ts"
+  },
+  "keywords": [
+    "agent",
+    "agentic-commerce",
+    "ai-agents",
+    "ed25519",
+    "signup",
+    "payments",
+    "mandate",
+    "protocol"
+  ],
+  "engines": { "node": ">=20" },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vyana-dev/agent-signup-protocol.git",
+    "directory": "packages/agent-signup-core"
+  },
+  "homepage": "https://github.com/vyana-dev/agent-signup-protocol#readme",
+  "publishConfig": { "access": "public" }
+}
