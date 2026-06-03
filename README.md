@@ -15,7 +15,7 @@
 <p align="center">
   <a href="./docs/COMIC.md"><img src="./docs/comic/cover.svg" alt="Open Agent Commerce — read the comic" width="660"></a>
   <br/>
-  <em>📖 New to agent commerce? <a href="./docs/COMIC.md"><b>Read the comic →</b></a> &nbsp;(8 panels, no spec required)</em>
+  <em>📖 New to agent commerce? <a href="./docs/COMIC.md"><b>Read the comic →</b></a> &nbsp;·&nbsp; <a href="https://vyana-dev.github.io/open-agent-commerce/comic/"><b>▶ Animated version</b></a> (11 scenes)</em>
 </p>
 
 Stewarded by **Vyana** as a neutral steward — published as an open standard, not

@@ -10,6 +10,13 @@ without reading a line of the spec first.
 The panels are hand-authored SVG (they render right here on GitHub). The full
 panel script is below, so the art can be re-illustrated or extended.
 
+> **▶ Prefer it animated?** There's an [**animated, scroll-driven version**](https://vyana-dev.github.io/open-agent-commerce/comic/)
+> with richer art and a motion beat per scene — 11 scenes covering the full set of
+> use cases (signup, cold-start, payment, step-up auth, lifecycle, ownership claim,
+> disputes, and cross-rail unification). Source: [`comic/index.html`](./comic/index.html).
+> *(Animations play in a browser / via GitHub Pages — GitHub's Markdown viewer
+> freezes SVGs, so the static panels below are the in-page fallback.)*
+
 ---
 
 ![Cover — Open Agent Commerce, Issue #1](./comic/cover.svg)
