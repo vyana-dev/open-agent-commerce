@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use Open Agent Commerce, please cite it as below."
+title: "Open Agent Commerce: protocols and reference primitives for agent-mediated commerce"
+abstract: >-
+  Open protocols and reference primitives that let AI agents create accounts,
+  authorize spend, receive credentials, and prove ownership under signed,
+  revocable user consent with a tamper-evident provenance trail, and a Unified
+  Agent Protocol that normalizes Visa TAP, Google AP2, and Stripe/OpenAI ACP into
+  one verifiable request.
+type: software
+version: "0.1.0"
+date-released: "2026-06-03"
+license: MIT
+repository-code: "https://github.com/vyana-dev/open-agent-commerce"
+url: "https://github.com/vyana-dev/open-agent-commerce"
+authors:
+  - name: "Vyana Technologies"
+keywords:
+  - agentic-commerce
+  - ai-agents
+  - payments
+  - protocol
+  - ed25519
+  - mandate
+  - know-your-agent

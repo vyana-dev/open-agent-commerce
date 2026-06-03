@@ -1,0 +1,6 @@
+# Default owners for everything in the repo. See MAINTAINERS.md.
+* @krishnachaitanyap
+
+# Normative specs and wire schemas: changes are wire-sensitive — review carefully.
+/spec/      @krishnachaitanyap
+/schemas/   @krishnachaitanyap

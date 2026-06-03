@@ -17,6 +17,13 @@ use independent draft versions (`asp-0.1`, `uap-0.1`).
 - **Conformance vectors** (`conformance/`) — canonical-form and signature
   fixtures with a runner, for cross-language interop.
 - Project hygiene: `SECURITY.md`, `CODE_OF_CONDUCT.md`, issue/PR templates.
+- **Standard-grade governance & docs**: `GOVERNANCE.md` (roles, RFC process,
+  path to neutral governance), `ROADMAP.md`, `MAINTAINERS.md`, `CITATION.cff`,
+  `.github/CODEOWNERS`; README expanded with design goals & non-goals, a
+  versioning/stability policy, standards & prior-art grounding, an
+  implementations table, and a community/support section.
+- Renamed the suite to **Open Agent Commerce**; package
+  `@vyana/agent-signup-core` → `@vyana/open-agent-commerce`.
 
 ## [0.1.0] — initial public draft
 
