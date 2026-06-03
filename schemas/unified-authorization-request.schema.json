@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vyana.ai/schemas/uap-0.1/unified-authorization-request.schema.json",
+  "title": "UnifiedAuthorizationRequest",
+  "description": "Canonical request that normalizes Visa TAP, Google AP2, Stripe/OpenAI ACP, and Vyana ASP/APP into one shape (UAP-0.1). Money is integer minor units.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["uap_version", "request_id", "created_at", "identity", "authorization", "sources"],
+  "properties": {
+    "uap_version": { "const": "uap-0.1" },
+    "request_id": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "sources": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/sourceProtocol" },
+      "minItems": 1
+    },
+    "identity": { "$ref": "#/$defs/identity" },
+    "authorization": { "$ref": "#/$defs/authorization" },
+    "instrument": { "$ref": "#/$defs/instrument" }
+  },
+  "$defs": {
+    "sourceProtocol": {
+      "type": "string",
+      "enum": ["vyana-asp", "vyana-app", "visa-tap", "google-ap2", "openai-acp"]
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "agent_id", "algorithm", "attestation", "verified"],
+      "properties": {
+        "source": { "$ref": "#/$defs/sourceProtocol" },
+        "agent_id": { "type": "string" },
+        "operator_id": { "type": "string" },
+        "key_id": { "type": "string" },
+        "algorithm": { "type": "string" },
+        "public_key_b64": { "type": "string" },
+        "attestation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "value"],
+          "properties": {
+            "kind": {
+              "type": "string",
+              "enum": ["ed25519-detached", "http-message-signature", "verifiable-credential", "payment-token"]
+            },
+            "value": { "type": "string" },
+            "covered": { "type": "array", "items": { "type": "string" } },
+            "session_id": { "type": "string" },
+            "issued_at": { "type": "string", "format": "date-time" }
+          }
+        },
+        "verified": { "type": "boolean", "description": "set by the verifier, never by an adapter" }
+      }
+    },
+    "authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "scope", "limits"],
+      "properties": {
+        "source": { "$ref": "#/$defs/sourceProtocol" },
+        "mandate_id": { "type": "string" },
+        "user_ref": { "type": "string" },
+        "intent": { "type": "string" },
+        "scope": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "services": { "type": "array", "items": { "type": "string" } },
+            "categories": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "limits": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "amount_minor": { "type": "integer", "minimum": 0, "description": "integer minor units (paise/cents)" },
+            "currency": { "type": "string", "description": "ISO 4217" },
+            "per_txn_minor": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "nonce": { "type": "string" },
+        "issued_at": { "type": "string", "format": "date-time" },
+        "expires_at": { "type": "string", "format": "date-time" },
+        "raw": { "description": "original source mandate object, for provenance" }
+      }
+    },
+    "instrument": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "type"],
+      "properties": {
+        "source": { "$ref": "#/$defs/sourceProtocol" },
+        "type": {
+          "type": "string",
+          "enum": ["par", "shared-payment-token", "upi-mandate", "upi-reserve-pay", "none"]
+        },
+        "reference": { "type": "string", "description": "PAR / token id / mandate id — never a PAN" },
+        "brand": { "type": "string" },
+        "last4": { "type": "string" }
+      }
+    }
+  }
+}

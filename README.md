@@ -58,6 +58,28 @@ ASP/APP are **rail-agnostic**: the mandates and receipts verify the same way
 whether settlement lands on UPI, cards, or a payment token. They're meant to be
 *consumed alongside* TAP/AP2/ACP, not to replace them.
 
+## Unified Agent Protocol (UAP)
+
+The agent-commerce ecosystem is fragmenting across protocols. UAP is a **neutral
+normalization layer**: adapters map **Visa TAP**, **Google AP2**, **Stripe/OpenAI
+ACP**, and **Vyana ASP/APP** into one canonical `UnifiedAuthorizationRequest`, so
+a verifier evaluates any of them with **one policy engine** and emits **one
+provenance record**.
+
+```ts
+import { fromVisaTap, fromAp2, fromAcp, fromVyana } from "@vyana/agent-signup-core";
+
+const req = fromVisaTap({ agentId, keyId, algorithm, signature, par, amountMinor, currency });
+// → { identity, authorization, instrument, sources: ["visa-tap"], … }
+// hand `req` to one verify chain, regardless of which protocol it arrived on.
+```
+
+UAP **does not replace or claim ownership** of TAP/AP2/ACP — those are owned by
+Visa/Google/Stripe. It normalizes their *shape* and leaves *verification* (RFC
+9421, VDC proofs, token validation, Ed25519) to the verifier. Spec:
+[`spec/UAP-0.1.md`](./spec/UAP-0.1.md) · demo:
+[`examples/unify-protocols.ts`](./examples/unify-protocols.ts).
+
 ## Core objects
 
 | Object | What it is |
@@ -101,11 +123,12 @@ shared per-object key list required. (Reference: `signing.ts → canonicalObject
 ## Repository layout
 
 ```
-spec/        ASP-0.1 + APP-0.1 normative specs (CC BY 4.0)
-schemas/     JSON Schema (2020-12) for each wire object — language-neutral
+spec/        ASP-0.1 + APP-0.1 + UAP-0.1 normative specs (CC BY 4.0)
+schemas/     JSON Schema (2020-12) for each wire object + the unified request
 packages/
   agent-signup-core/   @vyana/agent-signup-core — TS reference primitives (MIT)
-examples/    runnable sign-and-verify
+    src/uap/           Unified Agent Protocol: model + TAP/AP2/ACP/Vyana adapters
+examples/    sign-and-verify · unify-protocols
 ```
 
 ## Status & licensing

@@ -12,3 +12,6 @@
 export * from "./objects.ts";
 export * from "./signing.ts";
 export * from "./crypto.ts";
+
+// Unified Agent Protocol — normalize TAP / AP2 / ACP / Vyana into one request.
+export * from "./uap/index.ts";
