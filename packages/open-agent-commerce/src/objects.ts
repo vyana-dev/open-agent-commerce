@@ -112,6 +112,8 @@ export type CredentialCapsule = {
   capsule_id: string;
   mandate_id: string;
   issued_at: string;
+  expires_at: string; // capsule freshness — reject after this instant
+  nonce: string; // single-use; defeats capsule replay
   service: string;
   strategy_used: string;
   tos_class_used: "A" | "B" | "C";

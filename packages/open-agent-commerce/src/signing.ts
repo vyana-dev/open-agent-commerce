@@ -21,6 +21,15 @@ import {
   type KeyObject,
 } from "node:crypto";
 
+// Domain-separation tags bound into the signed bytes. A signature is computed
+// over `DOMAIN + payload`, so an Open Agent Commerce signature can never be
+// replayed as a signature in a different context — neither in another system
+// that signs raw JSON with the same key, nor across OAC's own signing surfaces
+// (a whole-object signature is not a valid request signature and vice-versa).
+// These tags are part of the wire format: changing them is wire-breaking.
+const OBJECT_DOMAIN = "open-agent-commerce/object/v1\n";
+const REQUEST_DOMAIN = "open-agent-commerce/request/v1\n";
+
 export type SigningPayload = {
   request_id: string;
   nonce: string;
@@ -44,7 +53,7 @@ export function canonicalize(p: SigningPayload): Buffer {
     config: p.config ?? {},
     user_raw_message: p.user_raw_message ?? "",
   };
-  return Buffer.from(JSON.stringify(ordered));
+  return Buffer.from(REQUEST_DOMAIN + JSON.stringify(ordered));
 }
 
 export function generateDeviceKeyPair() {
@@ -128,16 +137,22 @@ export function canonicalObject(obj: Record<string, unknown>): string {
   return stableStringify(clone);
 }
 
-/** Sign an ASP object (any shape) with an Ed25519 PEM. Returns base64. */
+/** Sign an ASP object (any shape) with an Ed25519 PEM. Returns base64.
+ *  Signs over OBJECT_DOMAIN + canonicalObject(obj) (domain-separated). */
 export function signAspObject(obj: Record<string, unknown>, privateKeyPem: string): string {
-  return signDetached(canonicalObject(obj), privateKeyPem);
+  return signDetached(OBJECT_DOMAIN + canonicalObject(obj), privateKeyPem);
 }
 
-/** Verify an ASP object's own `signature` field against a base64 DER(SPKI) key. */
+/** Verify an ASP object's own `signature` field against a base64 DER(SPKI) key.
+ *
+ *  IMPORTANT: this verifies the SIGNATURE ONLY. A `true` result means the bytes
+ *  are authentic and unmodified — it does NOT mean the object is safe to act on.
+ *  The caller (verifier) MUST still enforce `expires_at`, `nonce`/replay, scope,
+ *  and amount before honouring the object. See the verify chain in ASP-0.1 §9. */
 export function verifyAspObject(
   obj: Record<string, unknown> & { signature?: string },
   publicKeyDerBase64: string,
 ): boolean {
   if (!obj.signature || typeof obj.signature !== "string") return false;
-  return verifyDetached(canonicalObject(obj), obj.signature, publicKeyDerBase64);
+  return verifyDetached(OBJECT_DOMAIN + canonicalObject(obj), obj.signature, publicKeyDerBase64);
 }

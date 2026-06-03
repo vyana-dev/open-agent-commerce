@@ -6,6 +6,28 @@ use independent draft versions (`asp-0.1`, `uap-0.1`).
 
 ## [Unreleased]
 
+### Security & wire (pre-1.0, wire-breaking within the 0.1 draft)
+- **Domain-separated signatures.** Object signatures are now computed over
+  `"open-agent-commerce/object/v1\n" + canonicalForm`, and MCP-request signatures
+  over `"open-agent-commerce/request/v1\n" + payload`. This prevents an OAC
+  signature from being replayed in another signing context. Existing signatures
+  are invalidated; conformance vectors regenerated. Canonical-form (key-free)
+  vectors are unchanged.
+- **`verifyAspObject` documented as signature-only** — a `true` result means
+  authentic bytes, NOT "safe to act on"; callers MUST still enforce
+  expiry/replay/scope/amount (the verify chain).
+- **`CredentialCapsule` gains `expires_at` + `nonce`** (was a signed object
+  carrying live credentials with no freshness/replay protection).
+- **`crypto.ts` relabelled non-normative** (it is a reference vault, not part of
+  the wire format) and now binds the user id as AES-GCM AAD.
+
+### Fixed
+- **Verify-chain order unified** to one normative sequence across ASP §4/§9, the
+  README, UAP-0.1, and the reference verifier (was stated four different ways).
+- APP: removed private-monorepo path references, hedged the AP2 version/date
+  claim, added a status banner to §5 (only `CartMandate` is implemented), fixed a
+  dangling `(§13)` doc-comment, and aligned the cart-mandate schema `$id`.
+
 ### Added
 - **Unified Agent Protocol (UAP-0.1)** — neutral normalization layer mapping Visa
   TAP, Google AP2, Stripe/OpenAI ACP, and Vyana ASP/APP into one

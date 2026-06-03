@@ -235,11 +235,17 @@ verifyAspObject(mandate, publicKeyDerBase64);              // → true
 
 ## The one rule that makes signatures interoperate
 
-A signature is Ed25519 over the **canonical form** of an object: drop the
-`signature` field, then serialize with **recursively sorted keys**. Any party —
-in any language — re-derives the exact signed bytes from the object alone. No
-shared per-object key list required. (Reference: `signing.ts → canonicalObject`;
-proven by [`conformance/`](./conformance).)
+A signature is Ed25519 over a **domain-separated canonical form** of an object:
+drop the `signature` field, serialize with **recursively sorted keys**, and sign
+`"open-agent-commerce/object/v1\n" + canonicalForm`. Any party — in any language —
+re-derives the exact signed bytes from the object alone (no shared per-object key
+list), and the domain tag stops a signature being replayed in another context.
+(Reference: `signing.ts → canonicalObject` / `signAspObject`; proven by
+[`conformance/`](./conformance).)
+
+> Note: `verifyAspObject` checks the **signature only**. A `true` result means the
+> bytes are authentic — not that the object is safe to act on. A verifier MUST
+> still enforce `expires_at`, `nonce`/replay, scope, and amount (the verify chain).
 
 ## Repository layout
 

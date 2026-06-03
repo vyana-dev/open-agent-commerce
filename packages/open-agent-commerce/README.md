@@ -45,7 +45,11 @@ full runnable mint → sign → tamper → verify cycle.
 - **Signatures are EdDSA / Ed25519.** Public keys are base64 DER (SPKI); private
   keys are PKCS#8 PEM.
 - Canonical bytes are UTF-8 JSON with deeply sorted keys and the `signature`
-  field removed.
+  field removed, **prefixed with a domain tag** (`open-agent-commerce/object/v1\n`)
+  so a signature can't be replayed in another context.
+- **`verifyAspObject` is signature-only** — it does not check `expires_at` or
+  `nonce`. Authentic ≠ authorized; the verifier must still enforce
+  expiry/replay/scope/amount.
 
 Normative behaviour is defined in [`../../spec/ASP-0.1.md`](../../spec/ASP-0.1.md)
 and [`../../spec/APP-0.1.md`](../../spec/APP-0.1.md). License: MIT.

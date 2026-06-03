@@ -121,9 +121,9 @@
         "consent_budget": "one-tap",
         "user_raw_message": "sign me up for the pro plan on example.com",
         "signature_alg": "EdDSA",
-        "signature": "rWtRI25fICGNSlvOSOWo5ZyZ1pbvdbIAHnm4pRq+m2huuA8sYLqL5aoq8hDxLor5VjyQJiHRJ0TgPzk4lKLDCQ=="
+        "signature": "13Cs2B+XILonu46fyqo6CUgXLm5QrARIPWzmgNOX3Zfydnurp1v8oc/3c/uncR5B9WHOplj7PL5Di3/6OxOWDw=="
       },
-      "publicKeyDerBase64": "MCowBQYDK2VwAyEATNY+EEPRjJ736k2lQxQ/tx4FEMsGLmCkOCATIqat8mo=",
+      "publicKeyDerBase64": "MCowBQYDK2VwAyEAgLw7why1zceS6VebqYOXAXtwx5ANzOCYJ69G12PT2vQ=",
       "algorithm": "EdDSA",
       "expectVerify": true
     }
