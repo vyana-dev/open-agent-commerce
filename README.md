@@ -39,6 +39,7 @@ from any vendor are welcome.
 - [Design goals & non-goals](#design-goals--non-goals)
 - [Where this sits in the stack](#where-this-sits-in-the-stack)
 - [Unified Agent Protocol](#unified-agent-protocol)
+- [Interoperability status](#interoperability-status)
 - [How it works](#how-it-works)
 - [Core objects](#core-objects)
 - [Quick start](#quick-start)
@@ -151,6 +152,26 @@ Visa/Google/Stripe. It normalizes their *shape* and leaves *verification* (RFC
 9421, VDC proofs, token validation, Ed25519) to the verifier. Spec:
 [`spec/UAP-0.1.md`](./spec/UAP-0.1.md) · demo:
 [`examples/unify-protocols.ts`](./examples/unify-protocols.ts).
+
+## Interoperability status
+
+Open Agent Commerce is **designed to interoperate with** the major agent-commerce
+protocols. To be precise about what works today versus what is on the roadmap —
+no overclaiming:
+
+| Inbound protocol | Adapter | What it does today | Signature verification | Conformance vs a live implementation |
+|---|---|---|---|---|
+| Visa Trusted Agent Protocol | `fromVisaTap` | normalizes documented TAP concepts (RFC 9421 signature, PAR) into a Unified Authorization Request | done by the **verifier**, not the adapter | planned — [ROADMAP 0.2](./ROADMAP.md) |
+| Google AP2 | `fromAp2` | normalizes Cart/Payment Mandate (Verifiable Credential) concepts | done by the verifier | planned — [ROADMAP 0.2](./ROADMAP.md) |
+| Stripe/OpenAI ACP | `fromAcp` | normalizes Shared Payment Token concepts | done by the verifier | planned — [ROADMAP 0.2](./ROADMAP.md) |
+| Vyana ASP / Payment | `fromVyana` | full native mapping | Ed25519 over canonical form | ✓ [conformance vectors](./conformance) |
+
+The adapters map each protocol's **documented concepts**, not a pinned wire
+schema, and they **normalize shape only** — an adapter never asserts a request is
+verified (`identity.verified = false` until a verifier validates it). Field-level
+conformance against each protocol's reference implementation is tracked in the
+[roadmap](./ROADMAP.md). Open Agent Commerce is **not affiliated with or endorsed
+by** Visa, Google, Stripe, or OpenAI (see [trademarks](#license--trademarks)).
 
 ## How it works
 
@@ -321,3 +342,9 @@ names **"Open Agent Commerce"** and **"Vyana"** and associated logos are
 trademarks of Vyana Technologies; do not use them in ways that imply endorsement
 or official status without permission. Compatibility claims backed by passing
 [`conformance/`](./conformance) are always permitted.
+
+Open Agent Commerce is an **independent project** and is **not affiliated with,
+endorsed by, or sponsored by** Visa, Google, Stripe, or OpenAI. "Visa", "Trusted
+Agent Protocol", "AP2 / Agent Payments Protocol", and "Agentic Commerce Protocol"
+are trademarks of their respective owners; all references here are **nominative
+and descriptive**, used only to describe interoperability.

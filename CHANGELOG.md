@@ -24,6 +24,13 @@ use independent draft versions (`asp-0.1`, `uap-0.1`).
   implementations table, and a community/support section.
 - Renamed the suite to **Open Agent Commerce**; package
   `@vyana/agent-signup-core` → `@vyana/open-agent-commerce`.
+- **Honest interoperability framing**: an Interoperability status table (what the
+  TAP/AP2/ACP adapters do today — shape-normalization, draft — vs. conformance
+  against live implementations on the roadmap) and a non-affiliation / trademark
+  notice across README, the UAP spec, and the comic. No "supported by" overclaims.
+- **Explainer comic** (`docs/COMIC.md` + `docs/comic/*.svg`): 8-panel story
+  including the account lifecycle and ownership-claim flows; clickable cover hero
+  on the README home page.
 
 ## [0.1.0] — initial public draft
 

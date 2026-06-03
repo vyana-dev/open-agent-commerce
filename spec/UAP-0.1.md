@@ -23,6 +23,10 @@ an **interop/normalization** layer:
   each uses different algorithms and key-discovery mechanisms.
 - **It is rail-agnostic.** The same `UnifiedAuthorizationRequest` is produced
   whether settlement lands on cards (TAP/ACP), an AP2 instrument, or UPI.
+- **It is independent.** UAP is not affiliated with or endorsed by Visa, Google,
+  Stripe, or OpenAI. Protocol names are used nominatively to describe
+  interoperability; the mappings below are informative until confirmed against
+  each protocol's published specification.
 
 The value: a merchant or broker integrates **one** authorization + provenance
 engine and accepts agents arriving over **any** of these ecosystems.

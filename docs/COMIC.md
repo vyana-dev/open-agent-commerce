@@ -119,3 +119,7 @@ broker/verifier — a shield-shaped guardian). *Shops* (services / merchants).
 
 *Art and script: CC BY 4.0, like the rest of the spec prose. Remix it, translate
 it, make it yours.*
+
+*Brand names (Visa TAP, Google AP2, Stripe/OpenAI ACP) are used descriptively.
+Open Agent Commerce is an independent project, not affiliated with or endorsed by
+Visa, Google, Stripe, or OpenAI.*
