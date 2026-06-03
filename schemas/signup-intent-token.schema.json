@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vyana.ai/schemas/asp-0.1/signup-intent-token.schema.json",
+  "title": "SignupIntentToken",
+  "description": "Broker-signed, single-use, service-specific token for the native-asp path (ASP §7.4).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "sit_id", "version", "issued_at", "expires_at", "nonce", "idp", "service",
+    "plan", "config", "user_id", "ucm_id", "verified_email", "tos_version",
+    "signature_alg", "signature"
+  ],
+  "properties": {
+    "sit_id": { "type": "string" },
+    "version": { "const": "asp-0.1" },
+    "issued_at": { "type": "string", "format": "date-time" },
+    "expires_at": { "type": "string", "format": "date-time", "description": "<= 5 min from issue" },
+    "nonce": { "type": "string", "description": "single-use" },
+    "idp": { "type": "string" },
+    "service": { "type": "string" },
+    "plan": { "type": "string" },
+    "config": { "type": "object" },
+    "user_id": { "type": "string" },
+    "ucm_id": { "type": "string" },
+    "verified_email": { "type": "string", "format": "email" },
+    "tos_version": { "type": "string" },
+    "signature_alg": { "const": "EdDSA" },
+    "signature": { "type": "string", "description": "broker-signed, base64" }
+  }
+}

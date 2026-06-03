@@ -41,7 +41,7 @@
   </g>
 
   <!-- branch: claim anytime -->
-  <line x1="290" y1="146" x2="290" y2="250" stroke="#f59e0b" stroke-width="3" stroke-dasharray="6 5"/>
+  <line x1="290" y1="212" x2="290" y2="250" stroke="#f59e0b" stroke-width="3" stroke-dasharray="6 5"/>
   <polygon points="290,250 283,238 297,238" fill="#f59e0b"/>
   <g transform="translate(150,256)">
     <rect x="0" y="0" width="300" height="56" rx="12" fill="#fff7ed" stroke="#f59e0b" stroke-width="3"/>

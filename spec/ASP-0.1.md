@@ -235,7 +235,7 @@ Any ASP IdP **MUST** expose a discovery document at
     "browser-automation"
   ],
   "tos_url": "https://vyana.ai/legal/asp-terms",
-  "spec_url": "https://github.com/vyana/asp/blob/main/ASP-0.1.md"
+  "spec_url": "https://github.com/vyana-dev/open-agent-commerce/blob/main/spec/ASP-0.1.md"
 }
 ```
 
@@ -400,8 +400,9 @@ a declared ToS compliance class, and a declared minimum consent budget.
 - **Class B — Permitted with restrictions.** Some Services permit automation if rate-limited and labelled (e.g., "automated agent" headers). IdP MUST honour the Service's stated limits.
 - **Class C — Prohibited or grey area.** Service's ToS forbids automation or is silent. IdP **MUST NOT** select these strategies by default. The Mandate must explicitly include the strategy in `allowed_strategies`.
 
-A normative Service Compliance Registry is maintained at
-`https://asp.dev/registry/` (TBD; v0.1 publishes a starter list).
+A Service Compliance Registry (the mapping of Services to ToS class) is published
+alongside this spec in the repository; v0.1 ships a starter list. A hosted,
+queryable registry is planned for a later version (see ROADMAP).
 
 ### 7.2 Strategy selection algorithm
 
@@ -697,7 +698,7 @@ Brand:
 
 ---
 
-## 12A · Brokered Authentication (PR F — additive to v0.1)
+## 12A · Brokered Authentication (extension; additive to v0.1)
 
 This section describes how Service providers in IdP custody MAY route
 **sensitive authentication events** through the IdP for user approval,
@@ -913,7 +914,7 @@ Implementations MUST satisfy:
 - **Single-use everything**: `merchant_nonce`, `resolution_token`,
   step-up tokens.
 - **TTL on everything**: challenges (≤15m), step-up tokens (≤5m),
-  resolution tokens (≤60s), AOC claim URLs (30d per PR D).
+  resolution tokens (≤60s), AOC claim URLs (30d).
 - **Pinned keys** in both directions: Service-side IdP key pinned at
   SDK install; IdP-side Service key pinned at Service onboarding.
 - **SSRF guard**: `notify_url` MUST pass both an allow-list check
@@ -951,9 +952,9 @@ The following attacks were considered and have protocol-level defenses:
 - Inbound email parsing or relay inbox infrastructure.
 - SMS-channel challenges (regulated; future work).
 - MFA enrollment via brokered authentication (separate spec).
-- Mobile-push approval (Flavor C — depends on push infrastructure).
-- IdP-as-decision-authority mode (Flavor B — eliminates the OTP token
-  from the Service ↔ User surface; planned for v0.2).
+- Mobile-push approval (depends on push infrastructure; future work).
+- IdP-as-decision-authority mode (eliminates the OTP token from the
+  Service ↔ User surface; planned for v0.2).
 
 ---
 

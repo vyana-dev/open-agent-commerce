@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vyana.ai/schemas/asp-0.1/account-creation-receipt.schema.json",
+  "title": "AccountCreationReceipt",
+  "description": "Service-signed proof that an account was created under a SignupIntentToken (ASP §7.4).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "acr_id", "sit_id", "service", "user_id", "account_ref", "plan",
+    "created_at", "signature_alg", "signature"
+  ],
+  "properties": {
+    "acr_id": { "type": "string" },
+    "sit_id": { "type": "string", "description": "the SignupIntentToken this account was created under" },
+    "service": { "type": "string" },
+    "user_id": { "type": "string" },
+    "account_ref": { "type": "string" },
+    "plan": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "signature_alg": { "const": "EdDSA" },
+    "signature": { "type": "string", "description": "service-signed, base64" }
+  }
+}
