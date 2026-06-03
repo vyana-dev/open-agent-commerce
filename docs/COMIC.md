@@ -38,8 +38,8 @@ happened and *why*.
 ### 4 · The account is yours
 ![Panel 4 — account created, Maya receives an Account Ownership Certificate](./comic/panel-4.svg)
 
-The account is created, and Maya gets an **Ownership Certificate**. Even if the
-broker vanished tomorrow, the account is **hers** to claim directly.
+The account is created, and Maya gets an **Ownership Certificate** (AOC) — held
+in reserve. We'll see what it's for in panel 7.
 
 ### 5 · Pay — within bounds
 ![Panel 5 — ₹499 is paid automatically, ₹900 triggers a step-up approval](./comic/panel-5.svg)
@@ -47,8 +47,23 @@ broker vanished tomorrow, the account is **hers** to claim directly.
 Spending is checked against the consent caps on **every** transaction. Within
 bounds it just works; over the line, the agent must **ask Maya first**.
 
-### 6 · One referee for every rail
-![Panel 6 — Visa TAP, Google AP2, and ACP normalized into one request and one verifier](./comic/panel-6.svg)
+### 6 · The account's life
+![Panel 6 — lifecycle of an agent-provisioned account: created, active, renews, cancelled, with signed receipts](./comic/panel-6.svg)
+
+An account the agent provisioned has a full **lifecycle** — created → active →
+renews → cancelled — and **every transition emits a signed receipt**. The agent
+manages it under consent; cancelling returns a **prorated refund**; and at any
+point the user can step in and take ownership.
+
+### 7 · Take it back
+![Panel 7 — Maya claims the account directly at the service using the Ownership Certificate, bypassing the broker](./comic/panel-7.svg)
+
+This is the safety net. The **Ownership Certificate** is a **direct-claim path**:
+Maya proves ownership to the *service itself* — single-use token, service-signed
+— and takes full control. **Even if the broker disappears, the account is hers.**
+
+### 8 · One referee for every rail
+![Panel 8 — Visa TAP, Google AP2, and ACP normalized into one request and one verifier](./comic/panel-8.svg)
 
 Agents arrive over many rails. Open Agent Commerce normalizes them into **one
 verifiable request**, so one neutral referee checks them the same way.
@@ -76,13 +91,20 @@ broker/verifier — a shield-shaped guardian). *Shops* (services / merchants).
    *Vee:* “Every step gets a sealed, tamper-evident note.”
    *Caption:* First failure → bounced. Anything off → rejected. The provenance chain proves what happened.
 
-4. **The account is yours.** Vee provisions the account at NewsApp; the shop hands back receipts. Maya holds a glowing *Account Ownership Certificate*.
-   *Caption:* The account is created — and the Ownership Certificate means it’s hers, even if the broker disappears.
+4. **The account is yours.** Vee provisions the account at NewsApp; the shop hands back receipts. Maya holds a glowing *Account Ownership Certificate*, slipping it into her pocket for later.
+   *Caption:* The account is created — and the Ownership Certificate goes to Maya, held in reserve.
 
 5. **Pay — within bounds.** Split panel. Left: Ada pays ₹499 → green ✓ “PAID.” Right: a ₹900 charge → red “!” and a card: “Maya — approve this?”
    *Caption:* Caps are checked on every payment. Within bounds it just works; over the line, the agent asks Maya first.
 
-6. **One referee for every rail.** Three labeled rails (Visa TAP, Google AP2, Stripe/OpenAI ACP) funnel into one “Unified Authorization” request → one shield (one verify chain, one provenance record).
+6. **The account's life.** A lifecycle track: **Created** (ACR signed + AOC issued) → **Active** (agent manages it, bills within the cap) → **Renews** (a signed receipt each cycle) → **Cancelled** (a *Cancellation Receipt* + prorated refund). A dashed branch from “Active” drops down: *“…anytime → the user can take ownership.”*
+   *Caption:* An agent-provisioned account has a full life, and every transition emits a signed receipt. Cancelling returns a prorated refund.
+
+7. **Take it back.** Vee is faded and grey — “offline?” — off to the side. Maya, holding the *Ownership Certificate* (direct-claim link · single-use token · service-signed), walks a bold straight line **past** Vee to NewsApp. The shop checks it (✓) and hands her the account.
+   *Maya (calm):* “I'll take it from here.”
+   *Caption:* The Ownership Certificate is a direct path to claim the account at the service itself. Single-use, service-signed — Maya takes full control even if the broker disappears.
+
+8. **One referee for every rail.** Three labeled rails (Visa TAP, Google AP2, Stripe/OpenAI ACP) funnel into one “Unified Authorization” request → one shield (one verify chain, one provenance record).
    *Caption:* Many rails in, one verifiable request out — one neutral referee checks them all the same way.
    *Banner:* Consent in. Proof out. No keys. No custody.
 
@@ -91,7 +113,8 @@ broker/verifier — a shield-shaped guardian). *Shops* (services / merchants).
 ## Read on
 
 - The specs: [ASP](../spec/ASP-0.1.md) · [Agent Payment](../spec/APP-0.1.md) · [Unified Agent Protocol](../spec/UAP-0.1.md)
-- The mechanics, as engineering diagrams: [SEQUENCES.md](./SEQUENCES.md)
+- Account lifecycle & ownership objects: `AccountCreationReceipt`, `AccountOwnershipCertificate`, `CancellationReceipt` — see [`../schemas`](../schemas) and the [primitives](../packages/open-agent-commerce/src/objects.ts).
+- The mechanics, as engineering diagrams: [SEQUENCES.md](./SEQUENCES.md) (incl. the ownership-recovery flow).
 - Try it: [`../examples`](../examples) · prove interop: [`../conformance`](../conformance)
 
 *Art and script: CC BY 4.0, like the rest of the spec prose. Remix it, translate
