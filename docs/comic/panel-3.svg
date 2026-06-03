@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 480" font-family="'Trebuchet MS', Verdana, sans-serif">
+  <rect x="5" y="5" width="750" height="470" rx="12" fill="#ffffff" stroke="#1f2937" stroke-width="4"/>
+  <rect x="5" y="5" width="750" height="46" rx="12" fill="#111827"/>
+  <circle cx="34" cy="28" r="16" fill="#4f46e5"/><text x="34" y="34" text-anchor="middle" fill="#fff" font-size="17" font-weight="bold">3</text>
+  <text x="60" y="34" fill="#f9fafb" font-size="19" font-weight="bold">THE GAUNTLET</text>
+
+  <!-- agent sends signed request -->
+  <g transform="translate(70,150)">
+    <line x1="0" y1="-40" x2="0" y2="-26" stroke="#0d9488" stroke-width="3"/><circle cx="0" cy="-43" r="4" fill="#0d9488"/>
+    <rect x="-28" y="-26" width="56" height="46" rx="10" fill="#0d9488"/>
+    <circle cx="-10" cy="-4" r="6" fill="#022c22"/><circle cx="10" cy="-4" r="6" fill="#022c22"/>
+    <rect x="-24" y="26" width="48" height="50" rx="12" fill="#0d9488"/>
+    <text x="0" y="98" text-anchor="middle" fill="#0f766e" font-size="13" font-weight="bold">ADA</text>
+  </g>
+  <text x="70" y="128" text-anchor="middle" fill="#6b7280" font-size="12">signed request →</text>
+
+  <!-- the verify chain as a pipe of checks -->
+  <g transform="translate(150,96)">
+    <rect x="0" y="0" width="430" height="210" rx="14" fill="#f8fafc" stroke="#4f46e5" stroke-width="3"/>
+    <text x="215" y="30" text-anchor="middle" fill="#3730a3" font-size="17" font-weight="bold">VEE runs the verify chain</text>
+    <!-- 9 chips -->
+    <g font-size="12" font-weight="bold" text-anchor="middle">
+      <rect x="18" y="48" width="120" height="30" rx="8" fill="#e0e7ff"/><text x="78" y="68" fill="#3730a3">signature</text>
+      <rect x="155" y="48" width="120" height="30" rx="8" fill="#e0e7ff"/><text x="215" y="68" fill="#3730a3">mandate</text>
+      <rect x="292" y="48" width="120" height="30" rx="8" fill="#e0e7ff"/><text x="352" y="68" fill="#3730a3">ucm</text>
+      <rect x="18" y="88" width="120" height="30" rx="8" fill="#e0e7ff"/><text x="78" y="108" fill="#3730a3">kyc</text>
+      <rect x="155" y="88" width="120" height="30" rx="8" fill="#e0e7ff"/><text x="215" y="108" fill="#3730a3">scope</text>
+      <rect x="292" y="88" width="120" height="30" rx="8" fill="#e0e7ff"/><text x="352" y="108" fill="#3730a3">amount</text>
+      <rect x="18" y="128" width="120" height="30" rx="8" fill="#e0e7ff"/><text x="78" y="148" fill="#3730a3">intent</text>
+      <rect x="155" y="128" width="120" height="30" rx="8" fill="#e0e7ff"/><text x="215" y="148" fill="#3730a3">velocity</text>
+      <rect x="292" y="128" width="120" height="30" rx="8" fill="#e0e7ff"/><text x="352" y="148" fill="#3730a3">replay</text>
+    </g>
+    <text x="215" y="190" text-anchor="middle" fill="#dc2626" font-size="13" font-weight="bold">first failure → bounced. anything off → REJECT.</text>
+  </g>
+
+  <!-- provenance chain output -->
+  <g transform="translate(600,96)">
+    <text x="60" y="20" text-anchor="middle" fill="#334155" font-size="13" font-weight="bold">provenance</text>
+    <g>
+      <rect x="20" y="32" width="80" height="34" rx="6" fill="#0f172a"/><text x="60" y="54" text-anchor="middle" fill="#86efac" font-size="11">event ✓</text>
+      <line x1="60" y1="66" x2="60" y2="78" stroke="#94a3b8" stroke-width="2"/>
+      <rect x="20" y="78" width="80" height="34" rx="6" fill="#0f172a"/><text x="60" y="100" text-anchor="middle" fill="#86efac" font-size="11">event ✓</text>
+      <line x1="60" y1="112" x2="60" y2="124" stroke="#94a3b8" stroke-width="2"/>
+      <rect x="20" y="124" width="80" height="34" rx="6" fill="#0f172a"/><text x="60" y="146" text-anchor="middle" fill="#86efac" font-size="11">event ✓</text>
+    </g>
+    <text x="60" y="184" text-anchor="middle" fill="#64748b" font-size="11">hash-chained</text>
+  </g>
+
+  <rect x="5" y="404" width="750" height="71" rx="12" fill="#111827"/>
+  <text x="28" y="436" fill="#f9fafb" font-size="16">Every request runs a fixed gauntlet of checks. <tspan font-weight="bold" fill="#a5b4fc">Each step seals a</tspan></text>
+  <text x="28" y="461" fill="#f9fafb" font-size="16"><tspan font-weight="bold" fill="#a5b4fc">tamper-evident note</tspan> into a chain — so later, you can prove exactly what happened.</text>
+</svg>

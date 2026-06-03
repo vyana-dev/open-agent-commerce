@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 480" font-family="'Trebuchet MS', Verdana, sans-serif">
+  <rect x="6" y="6" width="748" height="468" rx="14" fill="#0b1020" stroke="#1f2937" stroke-width="5"/>
+  <rect x="6" y="6" width="748" height="468" rx="14" fill="url(#sky)"/>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1e1b4b"/>
+      <stop offset="1" stop-color="#0b1020"/>
+    </linearGradient>
+  </defs>
+  <!-- title -->
+  <text x="380" y="96" text-anchor="middle" fill="#f9fafb" font-size="50" font-weight="bold" letter-spacing="1">OPEN AGENT</text>
+  <text x="380" y="150" text-anchor="middle" fill="#a5b4fc" font-size="50" font-weight="bold" letter-spacing="1">COMMERCE</text>
+  <text x="380" y="190" text-anchor="middle" fill="#e5e7eb" font-size="19">How your AI agent shops for you — safely.</text>
+  <!-- issue badge -->
+  <rect x="300" y="208" width="160" height="30" rx="15" fill="#4f46e5"/>
+  <text x="380" y="229" text-anchor="middle" fill="#fff" font-size="15" font-weight="bold">ISSUE #1</text>
+
+  <!-- character lineup -->
+  <!-- user -->
+  <g transform="translate(150,300)">
+    <circle cx="0" cy="0" r="26" fill="#f59e0b"/>
+    <rect x="-26" y="30" width="52" height="58" rx="14" fill="#f59e0b"/>
+    <text x="0" y="116" text-anchor="middle" fill="#fcd34d" font-size="15" font-weight="bold">MAYA</text>
+    <text x="0" y="135" text-anchor="middle" fill="#9ca3af" font-size="12">the user</text>
+  </g>
+  <!-- agent robot -->
+  <g transform="translate(300,300)">
+    <line x1="0" y1="-40" x2="0" y2="-26" stroke="#5eead4" stroke-width="3"/><circle cx="0" cy="-42" r="4" fill="#5eead4"/>
+    <rect x="-28" y="-26" width="56" height="46" rx="10" fill="#0d9488"/>
+    <circle cx="-10" cy="-4" r="6" fill="#022c22"/><circle cx="10" cy="-4" r="6" fill="#022c22"/>
+    <rect x="-24" y="26" width="48" height="56" rx="12" fill="#0d9488"/>
+    <text x="0" y="116" text-anchor="middle" fill="#5eead4" font-size="15" font-weight="bold">ADA</text>
+    <text x="0" y="135" text-anchor="middle" fill="#9ca3af" font-size="12">the AI agent</text>
+  </g>
+  <!-- broker shield -->
+  <g transform="translate(450,300)">
+    <path d="M0,-40 L30,-28 L30,8 Q30,40 0,56 Q-30,40 -30,8 L-30,-28 Z" fill="#4f46e5"/>
+    <path d="M-12,8 l8,9 l18,-22" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="0" y="116" text-anchor="middle" fill="#a5b4fc" font-size="15" font-weight="bold">VEE</text>
+    <text x="0" y="135" text-anchor="middle" fill="#9ca3af" font-size="12">the broker / verifier</text>
+  </g>
+  <!-- merchant shop -->
+  <g transform="translate(600,300)">
+    <rect x="-30" y="-8" width="60" height="64" rx="6" fill="#e11d48"/>
+    <path d="M-34,-8 L34,-8 L24,-30 L-24,-30 Z" fill="#fb7185"/>
+    <rect x="-10" y="22" width="20" height="34" fill="#7f1d1d"/>
+    <text x="0" y="116" text-anchor="middle" fill="#fda4af" font-size="15" font-weight="bold">SHOPS</text>
+    <text x="0" y="135" text-anchor="middle" fill="#9ca3af" font-size="12">services / merchants</text>
+  </g>
+
+  <text x="380" y="456" text-anchor="middle" fill="#6b7280" font-size="13">Consent in. Proof out. No keys. No custody.</text>
+</svg>

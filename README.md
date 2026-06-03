@@ -148,10 +148,12 @@ Visa/Google/Stripe. It normalizes their *shape* and leaves *verification* (RFC
 
 ## How it works
 
-Full set of sequence + architecture diagrams: **[`docs/SEQUENCES.md`](./docs/SEQUENCES.md)**
-(UCM consent · native signup · cold-start signup · payment + settlement · the
-verify chain · unified verification · ownership recovery). Architecture at a
-glance:
+**New here? Read the [comic](./docs/COMIC.md)** — a one-page, story-first
+explainer (in the spirit of the 2008 Google Chrome comic). For the engineering
+view, the full set of sequence + architecture diagrams is in
+**[`docs/SEQUENCES.md`](./docs/SEQUENCES.md)** (UCM consent · native signup ·
+cold-start signup · payment + settlement · the verify chain · unified
+verification · ownership recovery). Architecture at a glance:
 
 ```mermaid
 flowchart LR

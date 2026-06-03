@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 480" font-family="'Trebuchet MS', Verdana, sans-serif">
+  <rect x="5" y="5" width="750" height="470" rx="12" fill="#ffffff" stroke="#1f2937" stroke-width="4"/>
+  <rect x="5" y="5" width="750" height="46" rx="12" fill="#111827"/>
+  <circle cx="34" cy="28" r="16" fill="#4f46e5"/><text x="34" y="34" text-anchor="middle" fill="#fff" font-size="17" font-weight="bold">2</text>
+  <text x="60" y="34" fill="#f9fafb" font-size="19" font-weight="bold">CONSENT, SIGNED ONCE</text>
+
+  <!-- Maya holding a phone with a key -->
+  <g transform="translate(150,210)">
+    <circle cx="0" cy="0" r="30" fill="#f59e0b"/>
+    <rect x="-30" y="36" width="60" height="70" rx="16" fill="#f59e0b"/>
+    <text x="0" y="132" text-anchor="middle" fill="#92400e" font-size="14" font-weight="bold">MAYA</text>
+  </g>
+  <!-- phone / device with key -->
+  <g transform="translate(250,120)">
+    <rect x="0" y="0" width="120" height="200" rx="18" fill="#0b1020" stroke="#111827" stroke-width="3"/>
+    <rect x="12" y="16" width="96" height="150" rx="8" fill="#111827"/>
+    <circle cx="60" cy="78" r="26" fill="none" stroke="#fbbf24" stroke-width="6"/>
+    <rect x="56" y="78" width="8" height="40" fill="#fbbf24"/><rect x="56" y="104" width="20" height="8" fill="#fbbf24"/>
+    <text x="60" y="150" text-anchor="middle" fill="#5eead4" font-size="11" font-weight="bold">device key</text>
+    <circle cx="60" cy="182" r="9" fill="#374151"/>
+  </g>
+  <!-- the mandate document -->
+  <g transform="translate(430,96)">
+    <rect x="0" y="0" width="290" height="250" rx="12" fill="#eef2ff" stroke="#4f46e5" stroke-width="3"/>
+    <text x="20" y="40" fill="#3730a3" font-size="20" font-weight="bold">User Consent Mandate</text>
+    <line x1="20" y1="54" x2="270" y2="54" stroke="#c7d2fe" stroke-width="2"/>
+    <text x="20" y="88" fill="#1f2937" font-size="16">• scope: news / media</text>
+    <text x="20" y="120" fill="#1f2937" font-size="16">• cap: ₹500 / month</text>
+    <text x="20" y="152" fill="#1f2937" font-size="16">• valid: 12 months</text>
+    <text x="20" y="184" fill="#1f2937" font-size="16">• revocable: anytime</text>
+    <rect x="20" y="202" width="250" height="34" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="34" y="225" fill="#166534" font-size="14" font-weight="bold">✓ signed (Ed25519)</text>
+  </g>
+
+  <rect x="5" y="404" width="750" height="71" rx="12" fill="#111827"/>
+  <text x="28" y="436" fill="#f9fafb" font-size="16">She signs <tspan font-weight="bold" fill="#a5b4fc">once</tspan>, on her own device. This one mandate bounds every future</text>
+  <text x="28" y="461" fill="#f9fafb" font-size="16">action — scope, caps, and time. <tspan font-weight="bold" fill="#86efac">She can revoke it instantly.</tspan></text>
+</svg>
