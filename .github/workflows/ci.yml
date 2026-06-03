@@ -13,18 +13,16 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - name: Install + typecheck primitives
-        working-directory: packages/open-agent-commerce
+      - name: Install (workspace root)
+        run: npm install
+      - name: Typecheck + build
         run: |
-          npm install
           npm run typecheck
           npm run build
       - name: Run examples
-        run: |
-          node --experimental-strip-types examples/sign-and-verify.ts
-          node --experimental-strip-types examples/unify-protocols.ts
+        run: npm run examples
       - name: Conformance vectors
-        run: node conformance/run.mjs
+        run: npm run conformance
       - name: Validate JSON Schemas are well-formed
         run: |
           for f in schemas/*.json; do
