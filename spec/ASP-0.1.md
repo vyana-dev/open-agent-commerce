@@ -170,14 +170,16 @@ UCM.
    4. Agent POSTs Mandate to IdP /v1/signup
         │
         ▼
-   5. IdP runs Verify Chain (§9)
+   5. IdP runs Verify Chain (§9), in order:
         │  ├─ signature
-        │  ├─ UCM active & covers scope
-        │  ├─ KYC level sufficient
-        │  ├─ caps
-        │  ├─ replay/nonce
-        │  ├─ scope
-        │  └─ rate limit
+        │  ├─ mandate   (well-formed, not expired)
+        │  ├─ ucm       (active, non-revoked, covers request)
+        │  ├─ kyc        (level sufficient)
+        │  ├─ scope      (service/category within UCM allow-lists)
+        │  ├─ amount     (price ≤ cap, within UCM caps)
+        │  ├─ intent     (matches user_raw_message)
+        │  ├─ velocity   (within rate limits)
+        │  └─ replay     (nonce unseen, timestamp fresh)
         ▼
    6. IdP selects Strategy via Service Adapter (§7)
         │
@@ -540,26 +542,31 @@ HKDF-SHA256 over an IdP-held KEK with `user_id` as the info parameter.
 
 ## 9 · The Verify Chain
 
-Before an IdP executes a Strategy it **MUST** run these checks in
-the order listed. Each step's result **MUST** be recorded in the
-Provenance Chain.
+Before an IdP executes a Strategy it **MUST** run these nine layers in
+**exactly this order**, fail-closed (the first failure stops the chain).
+Each layer's result **MUST** be appended to the Provenance Chain (§10).
 
-| # | Check | Failure mode |
-|---|---|---|
-| 1 | `signature` — Ed25519 verifies against `device_id` public key | reject signup |
-| 2 | `expiry` — Mandate not yet expired | reject signup |
-| 3 | `nonce` — not previously seen | reject signup |
-| 4 | `ucm` — `ucm_id` references an active, non-revoked UCM | reject signup |
-| 5 | `kyc` — User's KYC level ≥ that required for the requested category and caps | reject signup |
-| 6 | `consent_budget` — strategy required ≤ Mandate's budget | reject signup |
-| 7 | `caps` — Service+plan price ≤ `max_cost_paise` AND within the UCM's remaining caps | reject signup |
-| 8 | `scope` — requested Service/category is within the UCM's `allowed_categories`/`allowed_services` | reject signup |
-| 9 | `velocity` — within rate limits for this User | reject signup |
-| 10 | `intent` — `user_raw_message` plausibly matches Mandate intent | reject OR escalate to user |
+| # | Layer | Checks | Failure mode |
+|---|---|---|---|
+| 1 | `signature` | Ed25519 verifies against the `device_id` public key | reject |
+| 2 | `mandate` | Mandate is well-formed and not expired; `consent_budget` ≥ the selected strategy's minimum | reject |
+| 3 | `ucm` | `ucm_id` references an active, non-revoked UCM that covers this request | reject |
+| 4 | `kyc` | User's KYC level ≥ that required for the requested category and caps | reject |
+| 5 | `scope` | requested Service/category is within the UCM's `allowed_services` / `allowed_categories` | reject |
+| 6 | `amount` | Service+plan price ≤ `max_cost_paise` **and** within the UCM's remaining per-txn / daily / monthly caps | reject |
+| 7 | `intent` | `user_raw_message` plausibly matches the Mandate's intent | reject **or** escalate to user |
+| 8 | `velocity` | within rate limits for this User and device | reject |
+| 9 | `replay` | `nonce` not previously seen **and** `timestamp` within the allowed skew window | reject |
 
-Step 10 is intentionally heuristic; implementations MAY use lexical
-matching, semantic matching, or both. A `step_result: "pending"`
-return for step 10 means "escalate to User for explicit confirmation
+This is the single normative order. It matches the layer list in the
+README, `UAP-0.1` (§Verification & provenance), and the reference verifier.
+Some layers bundle sub-checks (`mandate` covers expiry + consent budget;
+`amount` covers per-transaction + windowed caps; `replay` covers nonce +
+timestamp skew).
+
+Layer 7 (`intent`) is intentionally heuristic; implementations MAY use
+lexical matching, semantic matching, or both. A `step_result: "pending"`
+return for `intent` means "escalate to the User for explicit confirmation
 before proceeding."
 
 ---

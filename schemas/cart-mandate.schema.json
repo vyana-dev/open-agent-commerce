@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://vyana.ai/schemas/app-0.1/cart-mandate.schema.json",
+  "$id": "https://vyana.ai/schemas/asp-0.1/cart-mandate.schema.json",
   "title": "CartMandate",
-  "description": "User-signed authorization to PAY a merchant (APP §13, AP2-aligned). Money is integer paise.",
+  "description": "User-signed authorization to PAY a merchant (APP §5.3, AP2-aligned). version is the shared Open Agent Commerce wire token asp-0.1. Money is integer paise.",
   "type": "object",
   "additionalProperties": false,
   "required": [

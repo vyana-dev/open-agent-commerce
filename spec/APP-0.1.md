@@ -7,7 +7,7 @@
 
 | | |
 |---|---|
-| **Status** | DRAFT — internal RFC |
+| **Status** | DRAFT — public RFC |
 | **Editor** | Vyana Technologies |
 | **Version** | 0.1 |
 | **License** | CC BY 4.0 (spec) · MIT (reference impl) |
@@ -175,6 +175,18 @@ It SHOULD NOT be the default.
 ---
 
 ## 5 · Objects
+
+> **Status of this section (read first).** Of the objects below, only the
+> **Cart Mandate** is currently implemented in code and has a JSON Schema — and
+> the **authoritative shape is the one in
+> [`schemas/cart-mandate.schema.json`](../schemas/cart-mandate.schema.json) and
+> [`objects.ts`](../packages/open-agent-commerce/src/objects.ts)** (`version:
+> "asp-0.1"`, `amount_paise`, `line_items`, `consent_budget`, …), which differs
+> from the illustrative JSON shown here. The Payment Intent Mandate and Payment
+> Execution Token below are **design sketches, not yet normative and not yet
+> schematized** — treat their field names as illustrative. They will be reconciled
+> with the schema set and given conformance vectors before APP leaves draft (see
+> [ROADMAP](../ROADMAP.md)). Do not implement against the JSON in §5.1/§5.4 yet.
 
 ### 5.1 Payment Intent Mandate
 
@@ -474,14 +486,17 @@ Do not ship prefunded wallet as the default payment model.
 - **ASP** creates accounts, credentials, ACR, and AOC.
 - **APP** authorizes payment, collection, settlement, refund, and payment
   receipts.
-- **AP2** is Google's open standard for agent-performed payments (v0.2.0, April
-  2026). APP maps its PIM/CartMandate/PET objects onto AP2's Open Checkout /
-  Checkout / Payment Mandates as SD-JWT Verifiable Credentials with `cnf` key
-  binding. Implemented in `broker/lib/ap2/` and documented in
-  `docs/design/ap2-interop-adapter.md`. Money crosses 1:1 because INR's ISO-4217
-  minor unit is the paise. The adapter is a translator at the boundary, not a
-  replacement: APP remains a superset (account provisioning, credential vault,
-  Account Ownership Certificates) that AP2 does not model.
+- **AP2** is Google's open agent-payments protocol. APP's payment objects
+  (Payment Intent Mandate / Cart Mandate / Payment Execution Token) are designed
+  to **align in shape** with AP2's mandate model (intent → cart → payment,
+  expressed as signed Verifiable Credentials). The exact field-level mapping is
+  **informative until confirmed against AP2's published specification** — see
+  [`UAP-0.1`](./UAP-0.1.md) for the normalization adapters and their status.
+  Money crosses 1:1 because INR's ISO-4217 minor unit is the paise. APP
+  additionally covers concerns AP2 does not model — account provisioning, the
+  credential vault, and Account Ownership Certificates — which it inherits from
+  ASP. (Open Agent Commerce is not affiliated with or endorsed by Google; "AP2"
+  is used nominatively.)
 - **ACP** is merchant checkout-oriented agentic commerce. APP can interoperate
   with ACP-style merchant checkout by treating the merchant checkout session as
   the payment rail and preserving Vyana's signed mandate/provenance layer.

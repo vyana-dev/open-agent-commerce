@@ -131,7 +131,7 @@ export type CredentialCapsule = {
 
 // ── Agent Payment Protocol (AP2-aligned) ─────────────────────────────────────
 
-/** User-signed authorization to PAY a merchant (AP2 "Cart Mandate"). (§13) */
+/** User-signed authorization to PAY a merchant (AP2-aligned "Cart Mandate"). See APP-0.1 §5.3. */
 export type CartMandate = {
   mandate_id: string;
   ucm_id: string;
