@@ -1,15 +1,25 @@
-# Agent Signup Protocol (ASP) + Agent Payment Protocol (APP)
+# Open Agent Commerce
 
 > Open protocols and reference primitives that let AI agents **create accounts,
 > authorize spend, receive credentials, and prove ownership** under signed,
-> revocable user consent — with a tamper-evident provenance trail.
+> revocable user consent — with a tamper-evident provenance trail — and that
+> **unify** the major agent-commerce rails (Visa TAP, Google AP2, Stripe/OpenAI
+> ACP) behind one verification model.
 
-[![spec](https://img.shields.io/badge/spec-ASP%200.1%20DRAFT-blue)](./spec/ASP-0.1.md)
+[![spec](https://img.shields.io/badge/spec-DRAFT%200.1-blue)](./spec)
 [![license: code MIT](https://img.shields.io/badge/license%20(code)-MIT-green)](./LICENSE-CODE)
 [![license: spec CC BY 4.0](https://img.shields.io/badge/license%20(spec)-CC%20BY%204.0-green)](./LICENSE-SPEC)
 
 Stewarded by **Vyana** — published as an open standard, not owned. Comments,
 issues, and implementations from any vendor are welcome.
+
+**Open Agent Commerce is a suite of three components:**
+
+| Component | What it does |
+|---|---|
+| **ASP** — Agent Signup Protocol | How an agent creates/connects an account and proves who owns it. |
+| **Agent Payment** (AP2-aligned) | How an agent is authorized to spend, and how settlement is proven. |
+| **Unified Agent Protocol** | A neutral layer that normalizes Visa TAP, Google AP2, Stripe/OpenAI ACP, and the above into one verifiable request. |
 
 ---
 
@@ -29,16 +39,17 @@ emits a portable, signed record of *why* an action was allowed.
 
 ## The solution
 
-Two small, signature-first protocols plus framework-free reference primitives:
+Signature-first protocols plus framework-free reference primitives:
 
-| Protocol | Question it answers | Core outputs |
+| Component | Question it answers | Core outputs |
 |---|---|---|
-| **ASP — Agent Signup Protocol** | Can this agent create/connect this merchant account, and who owns it? | `CredentialCapsule`, `AccountCreationReceipt`, `AccountOwnershipCertificate` |
-| **APP — Agent Payment Protocol** | Can this agent spend this amount here, and did settlement happen? | `CartMandate`, `Receipt` (AP2-aligned) |
+| **Agent Signup Protocol** | Can this agent create/connect this merchant account, and who owns it? | `CredentialCapsule`, `AccountCreationReceipt`, `AccountOwnershipCertificate` |
+| **Agent Payment** (AP2-aligned) | Can this agent spend this amount here, and did settlement happen? | `CartMandate`, `Receipt` |
+| **Unified Agent Protocol** | Can a verifier evaluate a TAP / AP2 / ACP / Vyana request with one engine? | `UnifiedAuthorizationRequest` |
 
-Both are bound to one **User Consent Mandate** (revocable) and one **provenance
-chain**. ASP is deliberately scoped to signup + initial credential issuance;
-ongoing payment/settlement is handled by APP or interoperable rails (AP2 / ACP).
+Signup and payment are bound to one **User Consent Mandate** (revocable) and one
+**provenance chain**. Signup is deliberately scoped to account creation + initial
+credential issuance; ongoing payment/settlement is AP2-aligned and rail-agnostic.
 
 ## Where this sits in the stack
 
@@ -67,7 +78,7 @@ a verifier evaluates any of them with **one policy engine** and emits **one
 provenance record**.
 
 ```ts
-import { fromVisaTap, fromAp2, fromAcp, fromVyana } from "@vyana/agent-signup-core";
+import { fromVisaTap, fromAp2, fromAcp, fromVyana } from "@vyana/open-agent-commerce";
 
 const req = fromVisaTap({ agentId, keyId, algorithm, signature, par, amountMinor, currency });
 // → { identity, authorization, instrument, sources: ["visa-tap"], … }
@@ -120,14 +131,14 @@ Full normative definitions: [`spec/ASP-0.1.md`](./spec/ASP-0.1.md) ·
 
 ```bash
 # reference primitives (TypeScript, Node ≥ 20, zero runtime deps)
-cd packages/agent-signup-core && npm install && npm run build
+cd packages/open-agent-commerce && npm install && npm run build
 
 # run the end-to-end sign → verify → tamper demo
 node --experimental-strip-types examples/sign-and-verify.ts
 ```
 
 ```ts
-import { signAspObject, verifyAspObject, generateDeviceKeyPair } from "@vyana/agent-signup-core";
+import { signAspObject, verifyAspObject, generateDeviceKeyPair } from "@vyana/open-agent-commerce";
 
 const { privateKeyPem, publicKeyDerBase64 } = generateDeviceKeyPair();
 const mandate = { /* a SignupMandate or CartMandate */ };
@@ -149,7 +160,7 @@ spec/        ASP-0.1 + APP-0.1 + UAP-0.1 normative specs (CC BY 4.0)
 schemas/     JSON Schema (2020-12) for each wire object + the unified request
 docs/        SEQUENCES.md — architecture + sequence diagrams (Mermaid)
 packages/
-  agent-signup-core/   @vyana/agent-signup-core — TS reference primitives (MIT)
+  open-agent-commerce/   @vyana/open-agent-commerce — TS reference primitives (MIT)
     src/uap/           Unified Agent Protocol: model + TAP/AP2/ACP/Vyana adapters
 examples/    sign-and-verify · unify-protocols
 conformance/ cross-language test vectors (canonical-form + signature) + runner

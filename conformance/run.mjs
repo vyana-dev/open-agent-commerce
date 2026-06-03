@@ -9,7 +9,7 @@ import { readFileSync } from "node:fs";
 import {
   canonicalObject,
   verifyAspObject,
-} from "../packages/agent-signup-core/dist/index.js";
+} from "../packages/open-agent-commerce/dist/index.js";
 
 const v = JSON.parse(readFileSync(new URL("./vectors.json", import.meta.url)));
 let failures = 0;

@@ -5,7 +5,7 @@
 ## Checklist
 
 - [ ] If a wire object changed, I updated **all three** in lockstep: TS types
-      (`packages/agent-signup-core/src/objects.ts`), JSON Schema (`schemas/`),
+      (`packages/open-agent-commerce/src/objects.ts`), JSON Schema (`schemas/`),
       and spec prose (`spec/`).
 - [ ] If canonicalization or a signed object changed, I bumped the protocol
       `version` and regenerated `conformance/vectors.json`.

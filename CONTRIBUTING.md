@@ -11,10 +11,10 @@ point at a section (`ASP §7.4`), state the problem, and propose wording.
 ## Change the wire objects carefully
 
 Signatures are computed over the **canonical form** of every object (drop the
-`signature` field, sort keys deeply — see `packages/agent-signup-core/src/signing.ts`).
+`signature` field, sort keys deeply — see `packages/open-agent-commerce/src/signing.ts`).
 That means:
 
-- The TypeScript types in `packages/agent-signup-core/src/objects.ts`, the JSON
+- The TypeScript types in `packages/open-agent-commerce/src/objects.ts`, the JSON
   Schemas in `schemas/`, and the spec prose in `spec/` MUST stay in lockstep.
   A field added in one and not the others is a bug.
 - Any change to a signed object is a **wire-breaking change** unless it is a new
@@ -31,7 +31,7 @@ That means:
 ## Local checks
 
 ```bash
-cd packages/agent-signup-core
+cd packages/open-agent-commerce
 npm install && npm run typecheck
 node --experimental-strip-types ../../examples/sign-and-verify.ts
 ```

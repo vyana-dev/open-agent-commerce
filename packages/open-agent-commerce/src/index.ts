@@ -1,4 +1,4 @@
-// @vyana/agent-signup-core — reference primitives for the Agent Signup Protocol
+// @vyana/open-agent-commerce — reference primitives for the Agent Signup Protocol
 // (ASP) and Agent Payment Protocol (APP).
 //
 // Three things, framework-free (Node `crypto` only):

@@ -11,7 +11,7 @@ import {
   canonicalObject,
   signAspObject,
   generateDeviceKeyPair,
-} from "../packages/agent-signup-core/dist/index.js";
+} from "../packages/open-agent-commerce/dist/index.js";
 
 const ucm = {
   ucm_id: "01H8X7UCM0000000000000000",

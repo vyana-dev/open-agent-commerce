@@ -1,10 +1,10 @@
-# @vyana/agent-signup-core
+# @vyana/open-agent-commerce
 
 Reference primitives for the **Agent Signup Protocol (ASP)** and **Agent Payment
 Protocol (APP)**. Framework-free — depends only on Node's built-in `crypto`.
 
 ```bash
-npm install @vyana/agent-signup-core
+npm install @vyana/open-agent-commerce
 ```
 
 ## What's in the box
@@ -23,7 +23,7 @@ re-derive the exact signed bytes from the object alone — no shared per-object 
 list required.
 
 ```ts
-import { signAspObject, verifyAspObject, generateDeviceKeyPair } from "@vyana/agent-signup-core";
+import { signAspObject, verifyAspObject, generateDeviceKeyPair } from "@vyana/open-agent-commerce";
 
 const { privateKeyPem, publicKeyDerBase64 } = generateDeviceKeyPair();
 

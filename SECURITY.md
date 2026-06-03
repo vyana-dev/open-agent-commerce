@@ -10,7 +10,7 @@ security reports are taken seriously.
 
 - a description and impact,
 - steps to reproduce (or a proof of concept),
-- affected component (spec section, `@vyana/agent-signup-core` version, or schema).
+- affected component (spec section, `@vyana/open-agent-commerce` version, or schema).
 
 We aim to acknowledge within 3 business days and to agree a disclosure timeline
 with you. Coordinated disclosure is appreciated; we credit reporters unless you

@@ -8,7 +8,7 @@ import {
   fromAp2,
   fromVyana,
   type UnifiedAuthorizationRequest,
-} from "../packages/agent-signup-core/src/index.ts";
+} from "../packages/open-agent-commerce/src/index.ts";
 
 // 1. An agent arriving over Visa TAP (RFC 9421 signed, card on file via PAR).
 const tap = fromVisaTap({

@@ -5,7 +5,7 @@ title: ""
 labels: bug
 ---
 
-**Component** (`@vyana/agent-signup-core` version / schema / adapter / conformance):
+**Component** (`@vyana/open-agent-commerce` version / schema / adapter / conformance):
 
 **What happened:**
 

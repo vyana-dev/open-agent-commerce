@@ -1,7 +1,7 @@
 {
-  "name": "@vyana/agent-signup-core",
+  "name": "@vyana/open-agent-commerce",
   "version": "0.1.0",
-  "description": "Reference primitives for the Agent Signup Protocol (ASP) and Agent Payment Protocol (APP): wire objects, canonical JSON, Ed25519 signing/verification, and credential-capsule encryption.",
+  "description": "Open Agent Commerce reference primitives: wire objects, canonical JSON, Ed25519 signing/verification, credential-capsule encryption, and the Unified Agent Protocol adapters (TAP/AP2/ACP/Vyana).",
   "license": "MIT",
   "type": "module",
   "main": "dist/index.js",
@@ -31,9 +31,9 @@
   "engines": { "node": ">=20" },
   "repository": {
     "type": "git",
-    "url": "https://github.com/vyana-dev/agent-signup-protocol.git",
-    "directory": "packages/agent-signup-core"
+    "url": "https://github.com/vyana-dev/open-agent-commerce.git",
+    "directory": "packages/open-agent-commerce"
   },
-  "homepage": "https://github.com/vyana-dev/agent-signup-protocol#readme",
+  "homepage": "https://github.com/vyana-dev/open-agent-commerce#readme",
   "publishConfig": { "access": "public" }
 }

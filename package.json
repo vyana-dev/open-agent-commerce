@@ -1,14 +1,14 @@
 {
-  "name": "agent-signup-protocol",
+  "name": "open-agent-commerce",
   "version": "0.1.0",
   "private": true,
-  "description": "Open protocols + reference primitives for AI-agent signup (ASP) and payment (APP).",
+  "description": "Open Agent Commerce — open protocols + reference primitives for AI-agent signup, payment (AP2-aligned), and a unified cross-rail authorization layer.",
   "type": "module",
   "license": "MIT",
   "workspaces": ["packages/*"],
   "scripts": {
-    "build": "npm run build --workspace @vyana/agent-signup-core",
-    "typecheck": "npm run typecheck --workspace @vyana/agent-signup-core",
+    "build": "npm run build --workspace @vyana/open-agent-commerce",
+    "typecheck": "npm run typecheck --workspace @vyana/open-agent-commerce",
     "examples": "node --experimental-strip-types examples/sign-and-verify.ts && node --experimental-strip-types examples/unify-protocols.ts",
     "conformance": "node conformance/run.mjs",
     "test": "npm run typecheck && npm run build && npm run examples && npm run conformance"
@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/vyana-dev/agent-signup-protocol.git"
+    "url": "https://github.com/vyana-dev/open-agent-commerce.git"
   },
   "engines": { "node": ">=22" }
 }

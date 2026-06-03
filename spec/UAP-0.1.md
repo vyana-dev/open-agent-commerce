@@ -145,10 +145,10 @@ specific verifier implementation.
 
 ## Reference code
 
-`@vyana/agent-signup-core` exports the model + adapters:
+`@vyana/open-agent-commerce` exports the model + adapters:
 
 ```ts
-import { fromVisaTap, fromAp2, fromAcp, fromVyana } from "@vyana/agent-signup-core";
+import { fromVisaTap, fromAp2, fromAcp, fromVyana } from "@vyana/open-agent-commerce";
 ```
 
 See [`../examples/unify-protocols.ts`](../examples/unify-protocols.ts) for a

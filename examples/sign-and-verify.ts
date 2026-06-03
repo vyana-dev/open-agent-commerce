@@ -12,7 +12,7 @@ import {
   verifyAspObject,
   canonicalObject,
   type SignupMandate,
-} from "../packages/agent-signup-core/src/index.ts";
+} from "../packages/open-agent-commerce/src/index.ts";
 
 const { privateKeyPem, publicKeyDerBase64 } = generateDeviceKeyPair();
 
