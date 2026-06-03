@@ -101,6 +101,31 @@ INR, cents for USD) with an explicit ISO-4217 `currency`. Never floats.
 | `user_raw_message` | `authorization.intent` |
 | UPI Reserve Pay / AutoPay | `instrument` (`upi-reserve-pay` / `upi-mandate`) |
 
+## Flow
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant SRC as Agent (TAP / AP2 / ACP / Vyana)
+    participant ADP as UAP adapter
+    participant VC as Verifier
+    participant PROV as Provenance ledger
+
+    SRC->>ADP: protocol-native request
+    ADP-->>VC: UnifiedAuthorizationRequest (identity + authorization + instrument)
+    Note over ADP,VC: normalize SHAPE only; identity.verified = false
+    VC->>VC: validate attestation per identity.attestation.kind → set verified
+    VC->>VC: enforce scope + limits
+    VC->>PROV: hash-chained event per step
+    alt verified & within policy
+        VC-->>SRC: ALLOW + provenance head
+    else
+        VC-->>SRC: DENY + provenance head
+    end
+```
+
+More diagrams: [`../docs/SEQUENCES.md`](../docs/SEQUENCES.md).
+
 ## Verification & provenance (normative)
 
 A UAP verifier MUST:

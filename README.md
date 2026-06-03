@@ -80,6 +80,28 @@ Visa/Google/Stripe. It normalizes their *shape* and leaves *verification* (RFC
 [`spec/UAP-0.1.md`](./spec/UAP-0.1.md) · demo:
 [`examples/unify-protocols.ts`](./examples/unify-protocols.ts).
 
+## How it works
+
+Full set of sequence + architecture diagrams: **[`docs/SEQUENCES.md`](./docs/SEQUENCES.md)**
+(UCM consent · native signup · cold-start signup · payment + settlement · the
+verify chain · unified UAP verification · ownership recovery). Architecture at a
+glance:
+
+```mermaid
+flowchart LR
+    AG["AI Agent<br/>(MCP client)"] -->|signed mandate| IDP
+    TAP["Visa TAP"] --> UAP
+    AP2["Google AP2"] --> UAP
+    ACP["Stripe/OpenAI ACP"] --> UAP
+    subgraph IDP["Vyana IdP / Broker"]
+        UAP["UAP adapters"] --> VC["Verify chain<br/>(9 layers)"] --> PROV["Provenance<br/>(hash-chained)"]
+    end
+    VC -->|provision / pay| SVC["Service / Merchant"]
+    VC -->|debit / settle| RAIL["UPI / Razorpay / card"]
+    SVC -->|ACR + AOC| VC
+    IDP -->|Capsule / Receipt| AG
+```
+
 ## Core objects
 
 | Object | What it is |
@@ -125,11 +147,26 @@ shared per-object key list required. (Reference: `signing.ts → canonicalObject
 ```
 spec/        ASP-0.1 + APP-0.1 + UAP-0.1 normative specs (CC BY 4.0)
 schemas/     JSON Schema (2020-12) for each wire object + the unified request
+docs/        SEQUENCES.md — architecture + sequence diagrams (Mermaid)
 packages/
   agent-signup-core/   @vyana/agent-signup-core — TS reference primitives (MIT)
     src/uap/           Unified Agent Protocol: model + TAP/AP2/ACP/Vyana adapters
 examples/    sign-and-verify · unify-protocols
+conformance/ cross-language test vectors (canonical-form + signature) + runner
 ```
+
+## Conformance
+
+Other-language implementations prove compatibility against
+[`conformance/vectors.json`](./conformance/vectors.json):
+
+```bash
+npm run build && node conformance/run.mjs
+```
+
+Canonical-form vectors are key-free and deterministic; signature vectors carry a
+public key + Ed25519 signature to check verification and tamper-rejection. CI
+runs them on every push.
 
 ## Status & licensing
 

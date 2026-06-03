@@ -9,8 +9,9 @@
   "scripts": {
     "build": "npm run build --workspace @vyana/agent-signup-core",
     "typecheck": "npm run typecheck --workspace @vyana/agent-signup-core",
-    "example": "node --experimental-strip-types examples/sign-and-verify.ts",
-    "test": "npm run typecheck && npm run example"
+    "examples": "node --experimental-strip-types examples/sign-and-verify.ts && node --experimental-strip-types examples/unify-protocols.ts",
+    "conformance": "node conformance/run.mjs",
+    "test": "npm run typecheck && npm run build && npm run examples && npm run conformance"
   },
   "devDependencies": {
     "@types/node": "^20.14.0",

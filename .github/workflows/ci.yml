@@ -23,6 +23,8 @@ jobs:
         run: |
           node --experimental-strip-types examples/sign-and-verify.ts
           node --experimental-strip-types examples/unify-protocols.ts
+      - name: Conformance vectors
+        run: node conformance/run.mjs
       - name: Validate JSON Schemas are well-formed
         run: |
           for f in schemas/*.json; do
