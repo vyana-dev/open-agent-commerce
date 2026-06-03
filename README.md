@@ -12,6 +12,12 @@
 [![license: spec CC BY 4.0](https://img.shields.io/badge/license%20(spec)-CC%20BY%204.0-green)](./LICENSE-SPEC)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](./CONTRIBUTING.md)
 
+<p align="center">
+  <a href="./docs/COMIC.md"><img src="./docs/comic/cover.svg" alt="Open Agent Commerce — read the comic" width="660"></a>
+  <br/>
+  <em>📖 New to agent commerce? <a href="./docs/COMIC.md"><b>Read the comic →</b></a> &nbsp;(8 panels, no spec required)</em>
+</p>
+
 Stewarded by **Vyana** as a neutral steward — published as an open standard, not
 owned (see [GOVERNANCE](./GOVERNANCE.md)). Comments, issues, and implementations
 from any vendor are welcome.
