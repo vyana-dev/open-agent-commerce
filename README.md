@@ -180,7 +180,12 @@ explainer (in the spirit of the 2008 Google Chrome comic). For the engineering
 view, the full set of sequence + architecture diagrams is in
 **[`docs/SEQUENCES.md`](./docs/SEQUENCES.md)** (UCM consent · native signup ·
 cold-start signup · payment + settlement · the verify chain · unified
-verification · ownership recovery). Architecture at a glance:
+verification · ownership recovery).
+
+For the **security model**, see **[`docs/agents-of-chaos.md`](./docs/agents-of-chaos.md)** —
+how OAC answers the agent failure modes red-teamed in *Agents of Chaos*
+(arXiv:2602.20021): unauthorized compliance, identity spoofing, resource abuse,
+false reporting, and accountability. Architecture at a glance:
 
 ```mermaid
 flowchart LR
